@@ -15,6 +15,9 @@ module.exports = {
     extend: {
       colors: {
         brand: "#FD4F00",
+      },
+      gridTemplateColumns: {
+        app: "minmax(18rem, 20rem) 1fr"
       }
     },
   },
