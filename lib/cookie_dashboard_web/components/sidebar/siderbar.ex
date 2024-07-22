@@ -3,6 +3,7 @@ defmodule CookieDashboardWeb.Sidebar do
   import CookieDashboardWeb.CoreComponents, only: [icon: 1]
   alias __MODULE__.Widgets
   alias __MODULE__.Profile
+  alias __MODULE__.Input
 
   def sidebar(assigns) do
     ~H"""
@@ -32,13 +33,12 @@ defmodule CookieDashboardWeb.Sidebar do
 
   defp search_bar(assigns) do
     ~H"""
-    <div class="mx-1 flex w-full items-center gap-2 rounded-lg border border-zinc-300 px-3 py-2 shadow-sm">
-      <.icon name="hero-magnifying-glass-solid" class="h-5 w-5" />
-      <input
-        type="search"
-        placeholder="search"
-        class=" flex-1 bg-transparent p-0 text-zinc-900 border-0 placeholder-zinc-600"
-      />
+    <div>
+      <Input.input type="search" placeholder="Search">
+        <:prefix>
+          <.icon name="hero-magnifying-glass-solid" class="h-5 w-5" />
+        </:prefix>
+      </Input.input>
     </div>
     """
   end
