@@ -17,7 +17,8 @@ module.exports = {
         brand: "#FD4F00",
       },
       gridTemplateColumns: {
-        app: "minmax(18rem, 20rem) 1fr"
+        app: "minmax(18rem, 20rem) 1fr",
+        navprofile: "max-content 1fr min-content"
       }
     },
   },
