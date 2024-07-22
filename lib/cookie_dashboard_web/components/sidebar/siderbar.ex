@@ -1,6 +1,8 @@
 defmodule CookieDashboardWeb.Sidebar do
   use Phoenix.Component
   import CookieDashboardWeb.CoreComponents, only: [icon: 1]
+  alias __MODULE__.Widgets
+  alias __MODULE__.Profile
 
   def sidebar(assigns) do
     ~H"""
@@ -20,55 +22,11 @@ defmodule CookieDashboardWeb.Sidebar do
           <.nav_items icon="hero-user-circle-solid" title="Support" />
           <.nav_items icon="hero-cog-solid" title="Settings" />
         </nav>
-        <.company_goals_widget />
+        <Widgets.company_goals_widget />
         <div class="h-px bg-zinc-00" />
-        <.profile />
+        <Profile.profile />
       </div>
     </aside>
-    """
-  end
-
-  defp profile(assigns) do
-    ~H"""
-    <div class="grid items-center gap-3 grid-cols-navprofile">
-      <img
-        src="https://github.com/rushikeshpandit.png"
-        alt="User profile photo"
-        class="h-10 w-10 rounded-full"
-      />
-      <div class="flex flex-col truncate">
-        <span class="text-sm font-semibold text-zinc-700">Rushikesh Pandit</span>
-        <span
-          class="text-sm text-zinc-500"
-          title="emailemailemailemailemailemailemailemailemailemailemail@email.com"
-        >
-          emailemailemailemailemailemailemailemailemailemailemail@email.com
-        </span>
-      </div>
-      <button>
-        <.icon name="hero-chevron-right-solid" class="ml-auto h-5 w-5 text-zinc-500 transition-all" />
-      </button>
-    </div>
-    """
-  end
-
-  defp company_goals_widget(assigns) do
-    ~H"""
-    <div class="flex flex-col gap-4 rounded-lg bg-sky-50 px-4 py-5">
-      <div class="space-y-1">
-        <span class="text-sm/5 font-medium text-sky-700">Goals Achived </span>
-        <p class="text-sm/5 text-sky-500">Your team has achieved 80% of the goal</p>
-      </div>
-      <div class="h-2 rounded-full bg-sky-100 ">
-        <div class="h-2 w-4/5 rounded-full bg-sky-600"></div>
-      </div>
-      <div class="space-x-3">
-        <button class="text-sm font-medium text-sky-500 hover:text-sky-600">Dismiss</button>
-        <button class="text-sm font-medium text-sky-700 hover:text-sky-900">
-          Set a new goal
-        </button>
-      </div>
-    </div>
     """
   end
 
