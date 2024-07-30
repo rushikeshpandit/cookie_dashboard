@@ -1,10 +1,59 @@
-<div class="p-8 bg-stone-50 text-stone-900 dark:text-stone-50 dark:bg-stone-900 h-screen ">
-    <h1 class="font-bold text-4xl md:text-5xl lg:text-6xl flex items-center gap-3 before:bg-sky-500 before:h-8 before:w-0.5 before:flex mb-8">Dashboard</h1>
-    <h2>Cookie Dashboard</h2>
-    <p>learn Tailwind</p>
-    <button
-      disabled
-      class=" bg-sky-500 px-4 py-2 rounded-md font-semibold mt-4 disabled:opacity-60 disabled:cursor-not-allowed enabled:hover:bg-sky-600 dark:bg-sky-400 dark:text-sky-50">
-    Join
-    </button>
+<h1 class="text-3xl font-medium text-zinc-900">Settings</h1>
+<nav class="mt-6 flex w-full items-center gap-3 border-b border-zinc-300">
+  <.tab_item
+    title="My Details"
+    link={~p"/dashboards?tab=my_details"}
+    is_selected={@tab == "my_details"}
+  />
+  <.tab_item
+    title="Profile"
+    link={~p"/dashboards?tab=profile"}
+    is_selected={@tab == "profile"}
+  />
+  <.tab_item
+    title="Password"
+    link={~p"/dashboards?tab=password"}
+    is_selected={@tab == "password"}
+  />
+  <.tab_item
+    title="Team"
+    link={~p"/dashboards?tab=team"}
+    is_selected={@tab == "team"}
+  />
+  <.tab_item
+    title="Plan"
+    link={~p"/dashboards?tab=plan"}
+    is_selected={@tab == "plan"}
+  />
+  <.tab_item
+    title="Billing"
+    link={~p"/dashboards?tab=billing"}
+    is_selected={@tab == "billing"}
+  />
+  <.tab_item
+    title="Email"
+    link={~p"/dashboards?tab=email"}
+    is_selected={@tab == "email"}
+  />
+  <.tab_item
+    title="Notifications"
+    link={~p"/dashboards?tab=notifications"}
+    is_selected={@tab == "notifications"}
+  />
+  <.tab_item
+    title="Integrations"
+    link={~p"/dashboards?tab=integrations"}
+    is_selected={@tab == "integrations"}
+  />
+  <.tab_item
+    title="API"
+    link={~p"/dashboards?tab=api"}
+    is_selected={@tab == "api"}
+  />
+</nav>
+
+<.live_component :if={@tab == "my_details"} module={MyDetails} id={@tab} />
+
+<div :if={@tab != "my_details"}>
+  <%= @tab %>
 </div>
