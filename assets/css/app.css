@@ -3,3 +3,7 @@
 @import "tailwindcss/utilities";
 
 /* This file is for your main application CSS */
+
+.generic-button {
+    @apply rounded-lg px-4 py-2 text-sm transition-all;
+}
