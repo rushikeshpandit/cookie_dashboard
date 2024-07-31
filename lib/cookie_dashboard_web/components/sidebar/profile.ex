@@ -12,19 +12,20 @@ defmodule CookieDashboardWeb.Sidebar.Profile do
       />
       <div class="flex flex-col truncate">
         <span class="text-sm font-semibold text-zinc-700">Rushikesh Pandit</span>
-        <span
-          class="text-sm text-zinc-500"
-          title="emailemailemailemailemailemailemailemailemailemailemail@email.com"
-        >
-          emailemailemailemailemailemailemailemailemailemailemail@email.com
+        <span class="text-sm text-zinc-500" title={@current_user.email}>
+          <%= @current_user.email %>
         </span>
       </div>
-      <button class="group ml-auto p-8 hover:bg-zinc-100 rounded-md bg-zinc-50">
+      <.link
+        href="/users/log_out"
+        method="delete"
+        class="group ml-auto p-8 hover:bg-zinc-100 rounded-md bg-zinc-50"
+      >
         <.icon
           name="hero-chevron-right-solid"
           class="ml-auto h-5 w-5 text-zinc-500 group-hover:text-sky-500 transition-all"
         />
-      </button>
+      </.link>
     </div>
     """
   end

@@ -16,17 +16,35 @@ defmodule CookieDashboardWeb.Sidebar do
           Cookies
         </span>
       </strong>
-      <.search_bar />
-      <.main_navigation />
-      <div class="mt-auto gap-6 flex flex-col">
-        <nav class="space-y-0.5">
-          <.nav_items icon="hero-user-circle-solid" title="Support" />
-          <.nav_items icon="hero-cog-solid" title="Settings" />
-        </nav>
-        <Widgets.company_goals_widget />
-        <div class="h-px bg-zinc-00" />
-        <Profile.profile />
-      </div>
+      <%= if @current_user do %>
+        <.search_bar />
+        <.main_navigation />
+        <div class="mt-auto gap-6 flex flex-col">
+          <nav class="space-y-0.5">
+            <.nav_items icon="hero-user-circle-solid" title="Support" />
+            <.nav_items icon="hero-cog-solid" title="Settings" link="/users/settings" />
+          </nav>
+          <Widgets.company_goals_widget />
+          <div class="h-px bg-zinc-00" />
+          <Profile.profile current_user={@current_user} />
+        </div>
+      <% else %>
+        <div class="flex space-x-2">
+          <.link
+            href="/users/register"
+            class="text-[0.8125rem] leading-6 text-zinc-900 font-semibold hover:text-zinc-700"
+          >
+            Register |
+          </.link>
+
+          <.link
+            href="/users/log_in"
+            class="text-[0.8125rem] leading-6 text-zinc-900 font-semibold hover:text-zinc-700"
+          >
+            Log in
+          </.link>
+        </div>
+      <% end %>
     </aside>
     """
   end
@@ -58,11 +76,12 @@ defmodule CookieDashboardWeb.Sidebar do
 
   attr :icon, :string, required: true
   attr :title, :string, required: true
+  attr :link, :string, default: "#"
 
   def nav_items(assigns) do
     ~H"""
     <a
-      href="#"
+      href={@link}
       class="flex items-center gap-3 rounded px-3 py-2 transition-all group hover:bg-sky-500 "
     >
       <.icon name={@icon} class="h-5 w-5 text-zinc-500 group-hover:text-sky-700" />

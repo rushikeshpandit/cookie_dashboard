@@ -21,7 +21,6 @@ defmodule CookieDashboardWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :home
-    live "/dashboards", DashboardLive.Index, :index
   end
 
   # Other scopes may use custom stacks.
@@ -67,6 +66,7 @@ defmodule CookieDashboardWeb.Router do
 
     live_session :require_authenticated_user,
       on_mount: [{CookieDashboardWeb.UserAuth, :ensure_authenticated}] do
+      live "/dashboards", DashboardLive.Index, :index
       live "/users/settings", UserSettingsLive, :edit
       live "/users/settings/confirm_email/:token", UserSettingsLive, :confirm_email
     end
