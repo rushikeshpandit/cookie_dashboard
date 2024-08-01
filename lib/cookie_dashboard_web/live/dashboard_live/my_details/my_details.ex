@@ -25,6 +25,11 @@ defmodule CookieDashboardWeb.DashboardLive.MyDetails do
     {:noreply, assign_form(socket, Map.put(changeset, :action, :validate))}
   end
 
+  def handle_event("cancel-upload", %{"ref" => ref, "upload_property" => upload_property}, socket) do
+
+    {:noreply, cancel_upload(socket, String.to_atom(upload_property), ref)}
+  end
+
   defp assign_form(socket, %Ecto.Changeset{} = changeset) do
     form = to_form(changeset, as: "user_form")
 

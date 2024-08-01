@@ -4,6 +4,7 @@ defmodule CookieDashboardWeb.Form.FileInput do
   import CookieDashboardWeb.CoreComponents, only: [icon: 1]
 
   attr :property_input, :any, required: true
+  attr :targer, :any, required: true
   slot :label
   slot :preview
 
@@ -12,7 +13,7 @@ defmodule CookieDashboardWeb.Form.FileInput do
     <section class="flex items-start gap-5" phx-drop-target={@property_input.ref}>
       <%= render_slot(@preview) || image_preview(assigns) %>
       <%= render_slot(@label) || default_label(assigns) %>
-      <.control property_input={@property_input}/>
+      <.control property_input={@property_input} />
     </section>
     """
   end
@@ -38,8 +39,9 @@ defmodule CookieDashboardWeb.Form.FileInput do
           or Drag and Drop
         </span>
         <span class="text-xs">
-        <%= accept_format(@property_input.accept)%> Add upto <%= @property_input.max_entries%>
-        (max <%= trunc(@property_input.max_file_size / 1_000_000) %> MB each)
+          <%= accept_format(@property_input.accept) %> Add upto <%= @property_input.max_entries %> (max <%= trunc(
+            @property_input.max_file_size / 1_000_000
+          ) %> MB each)
         </span>
       </div>
     </label>
@@ -56,7 +58,27 @@ defmodule CookieDashboardWeb.Form.FileInput do
   defp image_preview(assigns) do
     ~H"""
     <div class="bg-sky-50 h-16 w-16 flex items-center justify-center rounded-full">
-      <.icon name="hero-user-solid" class="h-8 w-8 text-sky-500" />
+      <.icon
+        :if={Enum.empty?(@property_input.entries)}
+        name="hero-user-solid"
+        class="h-8 w-8 text-sky-500"
+      />
+      <div :if={!Enum.empty?(@property_input.entries)}>
+        <.live_img_preview
+          entry={hd(@property_input.entries)}
+          class="h-16 w-16 rounded-full object-cover"
+        />
+        <button
+          type="button"
+          phx-target={@target}
+          phx-click="cancel-upload"
+          phx-value-ref={hd(@property_input.entries).ref}
+          phx-value-upload_property={@property_input.name}
+          aria-label="Cancel"
+        >
+          <.icon name="hero-x-mark-solid" class="h-3 w-3 text-zinc-500" />
+        </button>
+      </div>
     </div>
     """
   end
