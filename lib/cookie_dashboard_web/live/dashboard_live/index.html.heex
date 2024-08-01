@@ -52,7 +52,7 @@
   />
 </nav>
 
-<.live_component :if={@tab == "my_details"} module={MyDetails} id={@tab} />
+<.live_component :if={@tab == "my_details"} module={MyDetails} id={@tab} current_user={@current_user}/>
 
 <div :if={@tab != "my_details"}>
   <%= @tab %>
