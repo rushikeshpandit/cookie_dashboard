@@ -4,9 +4,19 @@ defmodule CookieDashboardWeb.DashboardLive.MyDetails do
   alias CookieDashboard.Accounts.User
   alias CookieDashboardWeb.Form.FileInput
 
+  @photo_upload_options [
+    accept: ~w(.jpg .jpeg .png .gif .svg),
+    max_entries: 1
+  ]
+
   def update(%{current_user: current_user} = assigns, socket) do
     user_changeset = Accounts.change_user_registration(current_user, assigns)
-    socket = socket |> assign(assigns) |> assign(user_form: to_form(user_changeset))
+    socket =
+      socket
+      |> assign(assigns)
+      |> allow_upload(:photo, @photo_upload_options)
+      |> allow_upload(:projects, @photo_upload_options)
+      |> assign(user_form: to_form(user_changeset))
     {:ok, socket}
   end
 

@@ -3,29 +3,30 @@ defmodule CookieDashboardWeb.Form.FileInput do
 
   import CookieDashboardWeb.CoreComponents, only: [icon: 1]
 
+  attr :property_input, :any, required: true
   slot :label
   slot :preview
 
   def upload_image(assigns) do
     ~H"""
-    <div class="flex items-start gap-5">
+    <section class="flex items-start gap-5" phx-drop-target={@property_input.ref}>
       <%= render_slot(@preview) || image_preview(assigns) %>
       <%= render_slot(@label) || default_label(assigns) %>
-      <.control />
-    </div>
+      <.control property_input={@property_input}/>
+    </section>
     """
   end
 
   defp control(assigns) do
     ~H"""
-    <input type="file" class="sr-only" id="photo" />
+    <.live_file_input upload={@property_input} class="sr-only" />
     """
   end
 
   defp default_label(assigns) do
     ~H"""
     <label
-      for="photo"
+      for={@property_input.ref}
       class="flex-1 cursor-pointer flex-col flex items-center gap-3 rounded-lg border border-zinc-300 hover:bg-sky-50 px-6 py-4 text-center hover:border-sky-300 text-zinc-500 hover:text-sky-500 shadow-sm transition-all group"
     >
       <div class="border-6 border-zinc-50 bg-zinc-100 rounded-full p-2 group-hover:bg-sky-200 group-hover:border-sky-100">
@@ -36,10 +37,20 @@ defmodule CookieDashboardWeb.Form.FileInput do
           <span class="font-semibold text-sky-700 group-hover:brightness-110">Click to upload</span>
           or Drag and Drop
         </span>
-        <span class="text-xs">SVG, PNG or GIF (max 2 MB)</span>
+        <span class="text-xs">
+        <%= accept_format(@property_input.accept)%> Add upto <%= @property_input.max_entries%>
+        (max <%= trunc(@property_input.max_file_size / 1_000_000) %> MB each)
+        </span>
       </div>
     </label>
     """
+  end
+
+  defp accept_format(accept) do
+    accept
+    |> String.replace(".", "")
+    |> String.replace(",", ", ")
+    |> String.upcase()
   end
 
   defp image_preview(assigns) do
