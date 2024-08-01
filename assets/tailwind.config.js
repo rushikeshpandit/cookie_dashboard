@@ -20,6 +20,9 @@ module.exports = {
         app: "minmax(18rem, 20rem) 1fr",
         navprofile: "max-content 1fr min-content",
         settingsform: "minmax(7.5rem, 17.5rem) minmax(25rem, 1fr) minmax(0, 15rem)"
+      },
+      borderWidth: {
+        6: "6px"
       }
     },
   },
