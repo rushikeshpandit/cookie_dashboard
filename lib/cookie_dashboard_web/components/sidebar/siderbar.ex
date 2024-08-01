@@ -22,7 +22,12 @@ defmodule CookieDashboardWeb.Sidebar do
         <div class="mt-auto gap-6 flex flex-col">
           <nav class="space-y-0.5">
             <.nav_items icon="hero-user-circle-solid" title="Support" />
-            <.nav_items icon="hero-cog-solid" title="Settings" link="/users/settings" />
+            <.nav_items
+              icon="hero-cog-solid"
+              title="Settings"
+              link="/users/settings"
+              is_expandable={false}
+            />
           </nav>
           <Widgets.company_goals_widget />
           <div class="h-px bg-zinc-00" />
@@ -65,7 +70,7 @@ defmodule CookieDashboardWeb.Sidebar do
     ~H"""
     <nav class="space-y-0.5">
       <.nav_items icon="hero-home-solid" title="Home" />
-      <.nav_items icon="hero-chart-bar-solid" title="Dashboard" />
+      <.nav_items icon="hero-chart-bar-solid" title="Dashboard" link="/dashboards" />
       <.nav_items icon="hero-square-2-stack-solid" title="Projects" />
       <.nav_items icon="hero-check-badge-solid" title="Tasks" />
       <.nav_items icon="hero-chart-pie-solid" title="Reporting" />
@@ -77,6 +82,7 @@ defmodule CookieDashboardWeb.Sidebar do
   attr :icon, :string, required: true
   attr :title, :string, required: true
   attr :link, :string, default: "#"
+  attr :is_expandable, :boolean, default: true
 
   def nav_items(assigns) do
     ~H"""
@@ -86,7 +92,7 @@ defmodule CookieDashboardWeb.Sidebar do
     >
       <.icon name={@icon} class="h-5 w-5 text-zinc-500 group-hover:text-sky-700" />
       <span class="font-medium text-zinc-700 group-hover:text-sky-700"><%= @title %></span>
-      <.icon name="hero-chevron-down-solid" class="ml-auto h-5 w-5 group-hover:text-sky-700" />
+      <.icon :if={@is_expandable} name="hero-chevron-down-solid" class="ml-auto h-5 w-5 group-hover:text-sky-700" />
     </a>
     """
   end
