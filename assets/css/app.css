@@ -7,3 +7,6 @@
 .generic-button {
     @apply rounded-lg px-4 py-2 text-sm transition-all;
 }
+.form-Label {
+    @apply text-sm font-medium text-zinc-700 
+}
