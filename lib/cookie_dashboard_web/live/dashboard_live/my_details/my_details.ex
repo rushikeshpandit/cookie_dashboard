@@ -2,6 +2,7 @@ defmodule CookieDashboardWeb.DashboardLive.MyDetails do
   use CookieDashboardWeb, :live_component
   alias CookieDashboard.Accounts
   alias CookieDashboard.Accounts.User
+  alias CookieDashboardWeb.Form.FileInput
 
   def update(%{current_user: current_user} = assigns, socket) do
     user_changeset = Accounts.change_user_registration(current_user, assigns)
