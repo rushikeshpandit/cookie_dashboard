@@ -4,7 +4,7 @@ defmodule CookieDashboardWeb.Form.FileInput do
   import CookieDashboardWeb.CoreComponents, only: [icon: 1]
 
   attr :property_input, :any, required: true
-  attr :targer, :any, required: true
+  attr :target, :any, required: true
   slot :label
   slot :preview
 
@@ -48,6 +48,8 @@ defmodule CookieDashboardWeb.Form.FileInput do
     """
   end
 
+  defp accept_format(:any), do: ""
+
   defp accept_format(accept) do
     accept
     |> String.replace(".", "")
@@ -79,6 +81,49 @@ defmodule CookieDashboardWeb.Form.FileInput do
           <.icon name="hero-x-mark-solid" class="h-3 w-3 text-zinc-500" />
         </button>
       </div>
+    </div>
+    """
+  end
+
+  def file_list(assigns) do
+    ~H"""
+    <div class="mt-5 space-y-3">
+      <article :for={entry <- @property_input.entries}>
+        <div class="group flex items-start gap-4 rounded-lg border border-zinc-200 p-4">
+          <div class="rounded-full border-4 bg-sky-200 border-sky-100 text-sky-600">
+            <.icon name="hero-cloud-arrow-up-solid" class="h-5 w-5" />
+          </div>
+          <div class="flex flex-1 flex-col items-start gap-1">
+            <div class="fle flex-col ">
+              <span class="text-sm font-medium text-sinc-700">
+                <%= entry.client_name %>
+              </span>
+              <span class="text-sm text-sinc-600">
+                <%= entry.client_size / 1_000_000 %> MB
+              </span>
+            </div>
+            <div class="flex w-full items-center gap-3">
+              <div class="h-2 flex-1 rounded-full bg-zinc-100">
+                <div class="w-4/5 h-2 rounded-full bg-sky-600"></div>
+              </div>
+              <div class="text-sm font-medium text-zinc-700">
+                <%= entry.progress %>
+              </div>
+            </div>
+          </div>
+          <button
+            type="button"
+            class="ml-auto rounded-md p-2 hover:bg-zinc-50"
+            phx-target={@target}
+            phx-click="cancel-upload"
+            phx-value-ref={entry.ref}
+            phx-value-upload_property={@property_input.name}
+            aria-label="Cancle"
+          >
+            <.icon name="hero-x-mark-solid" class="h-3 w-3 text-zinc-500" />
+          </button>
+        </div>
+      </article>
     </div>
     """
   end
