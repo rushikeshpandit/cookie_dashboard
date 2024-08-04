@@ -19,7 +19,7 @@ defmodule CookieDashboardWeb.DashboardLive.Index do
         "relative px-1 pb-4 text-sm font-medium hover:text-sky-700 transition-all"
       }
     >
-      <span><%= @title %></span>
+      <span class="whitespace-nowrap group-focus-visible:ring-2 group-focus-visible:ring-sky-400 rounded group-focus-visible:ring-offset-4"><%= @title %></span>
       <div :if={@is_selected} class="absolute -bottom-px left-0 right-0 h-0.5 bg-sky-700"></div>
     </.link>
     """

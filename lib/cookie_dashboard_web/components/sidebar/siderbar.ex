@@ -7,49 +7,55 @@ defmodule CookieDashboardWeb.Sidebar do
 
   def sidebar(assigns) do
     ~H"""
-    <aside class="border-b bg-zinc-200 flex flex-col gap-6 fixed bottom-0 left-0 top-0 right-0 bg-white z-10 p-4 md:relative md:right-auto md:w-80 md:border-r md:px-5 md:py-8">
-      <strong class=" mx-1 flex gap-2 text-xl items-center font-semibold text-zinc-900">
-        <span>
-          l
-        </span>
-        <span>
-          Cookies
-        </span>
-      </strong>
-      <%= if @current_user do %>
-        <.search_bar />
-        <.main_navigation />
-        <div class="mt-auto gap-6 flex flex-col">
-          <nav class="space-y-0.5">
-            <.nav_items icon="hero-user-circle-solid" title="Support" />
-            <.nav_items
-              icon="hero-cog-solid"
-              title="Settings"
-              link="/users/settings"
-              is_expandable={false}
-            />
-          </nav>
-          <Widgets.company_goals_widget />
-          <div class="h-px bg-zinc-00" />
-          <Profile.profile current_user={@current_user} />
-        </div>
-      <% else %>
-        <div class="flex space-x-2">
-          <.link
-            href="/users/register"
-            class="text-[0.8125rem] leading-6 text-zinc-900 font-semibold hover:text-zinc-700"
-          >
-            Register |
-          </.link>
+    <aside
+      id="aside"
+      class="border-b border-zinc-200 flex flex-col gap-6 fixed bottom-0 left-0 top-0 right-0 bg-white p-4 md:relative md:right-auto md:w-80 md:border-r md:px-5 md:py-8"
+    >
+      <div class="flex items-center justify-between bg-white">
+        <strong class=" mx-1 flex gap-2 text-xl items-center font-semibold text-zinc-900">
+          <span>l</span>
+          <span>Cookies</span>
+        </strong>
+        <button id="menu-button" type="button" class="btn-ghost md:hidden">
+          <.icon name="hero-bars-3-solid" class="h-6 w-6 text-zinc-500" />
+        </button>
+      </div>
+      <div class="hidden md:flex md:flex-col md:bg-transparent bg-white" id="menu">
+        <%= if @current_user do %>
+          <.search_bar />
+          <.main_navigation />
+          <div class="mt-auto gap-6 flex flex-col">
+            <nav class="space-y-0.5">
+              <.nav_items icon="hero-user-circle-solid" title="Support" />
+              <.nav_items
+                icon="hero-cog-solid"
+                title="Settings"
+                link="/users/settings"
+                is_expandable={false}
+              />
+            </nav>
+            <Widgets.company_goals_widget />
+            <div class="h-px bg-zinc-00" />
+            <Profile.profile current_user={@current_user} />
+          </div>
+        <% else %>
+          <div class="flex space-x-2">
+            <.link
+              href="/users/register"
+              class="text-[0.8125rem] leading-6 text-zinc-900 font-semibold hover:text-zinc-700"
+            >
+              Register |
+            </.link>
 
-          <.link
-            href="/users/log_in"
-            class="text-[0.8125rem] leading-6 text-zinc-900 font-semibold hover:text-zinc-700"
-          >
-            Log in
-          </.link>
-        </div>
-      <% end %>
+            <.link
+              href="/users/log_in"
+              class="text-[0.8125rem] leading-6 text-zinc-900 font-semibold hover:text-zinc-700"
+            >
+              Log in
+            </.link>
+          </div>
+        <% end %>
+      </div>
     </aside>
     """
   end

@@ -42,3 +42,15 @@ liveSocket.connect()
 // >> liveSocket.disableLatencySim()
 window.liveSocket = liveSocket
 
+document.addEventListener("DOMContentLoaded", function() {
+  const button = document.querySelector("#menu-button")
+  const menu = document.querySelector("#menu")
+  const aside = document.querySelector("#aside")
+
+  if(menu !== null){
+    button.addEventListener("click", function(){
+      menu.classList.toggle("hidden")
+      aside.classList.toggle("expand-sidebar")
+    })
+  }
+})

@@ -10,3 +10,6 @@
 .form-Label {
     @apply text-sm font-medium text-zinc-700 
 }
+.expand-sidebar {
+    @apply z-10 bg-white h-screen
+}
