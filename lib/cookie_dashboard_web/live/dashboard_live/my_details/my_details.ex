@@ -9,14 +9,21 @@ defmodule CookieDashboardWeb.DashboardLive.MyDetails do
     max_entries: 1
   ]
 
+  @projects_upload_options [
+    accept: :any,
+    max_entries: 10
+  ]
+
   def update(%{current_user: current_user} = assigns, socket) do
     user_changeset = Accounts.change_user_registration(current_user, assigns)
+
     socket =
       socket
       |> assign(assigns)
       |> allow_upload(:photo, @photo_upload_options)
-      |> allow_upload(:projects, @photo_upload_options)
+      |> allow_upload(:projects, @projects_upload_options)
       |> assign(user_form: to_form(user_changeset))
+
     {:ok, socket}
   end
 
@@ -26,7 +33,6 @@ defmodule CookieDashboardWeb.DashboardLive.MyDetails do
   end
 
   def handle_event("cancel-upload", %{"ref" => ref, "upload_property" => upload_property}, socket) do
-
     {:noreply, cancel_upload(socket, String.to_atom(upload_property), ref)}
   end
 
