@@ -41,7 +41,7 @@
         <span class="mt-0.5">Photo upload</span>
         <p class="font-normal text-zinc-500">This will be displayed on your profile.</p>
       </div>
-      <FileInput.upload_image property_input={@uploads.photo} target={@myself}/>
+      <FileInput.upload_image property_input={@uploads.photo} target={@myself} />
     </fieldset>
 
     <fieldset class="grid gap-3 grid-cols-settingsform items-center">
@@ -72,9 +72,12 @@
         <span class="mt-0.5">Portfolio Projects</span>
         <p class="font-normal text-zinc-500">Share few code snippets of your work</p>
       </div>
+      <div>
       <FileInput.upload_image property_input={@uploads.projects} target={@myself}>
-      <:preview></:preview>
+        <:preview></:preview>
       </FileInput.upload_image>
+      <FileInput.file_list property_input={@uploads.projects} target={@myself} />
+      </div>
     </fieldset>
 
     <div class="flex items-center justify-end gap-2">
