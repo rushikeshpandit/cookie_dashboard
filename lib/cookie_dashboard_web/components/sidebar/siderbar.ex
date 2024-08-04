@@ -7,7 +7,7 @@ defmodule CookieDashboardWeb.Sidebar do
 
   def sidebar(assigns) do
     ~H"""
-    <aside class="border-r bg-zinc-200 px-5 py-8 flex flex-col gap-6">
+    <aside class="border-b bg-zinc-200 flex flex-col gap-6 fixed bottom-0 left-0 top-0 right-0 bg-white z-10 p-4 md:relative md:right-auto md:w-80 md:border-r md:px-5 md:py-8">
       <strong class=" mx-1 flex gap-2 text-xl items-center font-semibold text-zinc-900">
         <span>
           l
@@ -92,7 +92,11 @@ defmodule CookieDashboardWeb.Sidebar do
     >
       <.icon name={@icon} class="h-5 w-5 text-zinc-500 group-hover:text-sky-700" />
       <span class="font-medium text-zinc-700 group-hover:text-sky-700"><%= @title %></span>
-      <.icon :if={@is_expandable} name="hero-chevron-down-solid" class="ml-auto h-5 w-5 group-hover:text-sky-700" />
+      <.icon
+        :if={@is_expandable}
+        name="hero-chevron-down-solid"
+        class="ml-auto h-5 w-5 group-hover:text-sky-700"
+      />
     </a>
     """
   end
